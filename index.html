@@ -1,0 +1,1509 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>โรงเก็บขยะเพลิงของราชา TRIPLE THREE | หมุนไม่หยุด</title>
+<meta name="description" content="โรงเก็บขยะที่ไฟไหม้ของราชา TRIPLE THREE กดสุ่มเมนูจากกองเพลิง หมุนสะสมได้ไม่จำกัด">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%94%A5%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0b0604;
+    --panel:#160d07;
+    --panel-2:#1e1209;
+    --ink:#ffe9d2;
+    --muted:#b8a08c;
+    --gold:#ffb020;
+    --gold-light:#ffe08a;
+    --fire:#ff6b2c;
+    --red:#f43f5e;
+    --line:rgba(255,176,32,.16);
+    --gold-grad:linear-gradient(135deg,#ffe89a 0%,#ffc23d 45%,#ff8a00 100%);
+    --fire-grad:linear-gradient(135deg,#ffd166 0%,#ff6b2c 55%,#e8253f 100%);
+    --hazard:repeating-linear-gradient(-45deg,#ffb020 0 14px,#0b0604 14px 28px);
+    --shadow-fire:0 40px 90px -40px rgba(255,90,0,.5);
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+
+  html{scroll-behavior:smooth}
+
+  body{
+    font-family:'Prompt',system-ui,-apple-system,'Segoe UI',sans-serif;
+    background:
+      radial-gradient(1100px 620px at 50% -12%,rgba(255,106,44,.22),transparent 60%),
+      radial-gradient(900px 520px at 100% 20%,rgba(244,63,94,.12),transparent 55%),
+      radial-gradient(800px 500px at 0% 30%,rgba(255,176,32,.08),transparent 60%),
+      var(--bg);
+    color:var(--ink);
+    min-height:100vh;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  ::selection{background:rgba(255,176,32,.35);color:#fff}
+
+  a{color:inherit;text-decoration:none}
+
+  img{display:block;max-width:100%}
+
+  button{font-family:inherit}
+
+  :focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+
+  .container{width:min(1160px,100% - 48px);margin-inline:auto}
+
+  .glow{position:fixed;border-radius:50%;pointer-events:none;filter:blur(110px);z-index:-1}
+  .glow-a{width:46vw;height:46vw;left:-14vw;top:-16vw;background:radial-gradient(circle,rgba(255,107,44,.18),transparent 70%);animation:drift 26s ease-in-out infinite alternate}
+  .glow-b{width:40vw;height:40vw;right:-12vw;top:30vh;background:radial-gradient(circle,rgba(232,37,63,.14),transparent 70%);animation:drift 32s ease-in-out infinite alternate-reverse}
+
+  .nav-wrap{
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:rgba(11,6,4,.78);
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--line);
+  }
+
+  .nav{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+    padding:14px 0;
+  }
+
+  .brand{display:flex;align-items:center;gap:12px;flex-shrink:0}
+
+  .crown{
+    display:inline-block;
+    font-size:1.5rem;
+    color:var(--gold-light);
+    text-shadow:0 0 18px rgba(255,176,32,.55);
+    animation:spin 14s linear infinite;
+  }
+
+  .brand-text{
+    display:flex;
+    flex-direction:column;
+    font-weight:700;
+    font-size:1.02rem;
+    letter-spacing:.02em;
+    background:var(--gold-grad);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    line-height:1.2;
+  }
+
+  .brand-text small{
+    font-size:.6rem;
+    font-weight:500;
+    letter-spacing:.18em;
+    color:var(--muted);
+    -webkit-text-fill-color:var(--muted);
+    margin-top:3px;
+  }
+
+  .nav-links{display:flex;gap:22px;font-size:.9rem;color:var(--muted)}
+  .nav-links a{position:relative;padding:4px 0;transition:color .2s}
+  .nav-links a:hover{color:var(--gold-light)}
+  .nav-links a::after{
+    content:"";
+    position:absolute;
+    left:0;right:100%;bottom:0;
+    height:2px;
+    background:var(--fire-grad);
+    transition:right .25s ease;
+    border-radius:2px;
+  }
+  .nav-links a:hover::after{right:0}
+
+  .btn-fire{
+    background:var(--fire-grad);
+    color:#241000;
+    border:none;
+    font-weight:700;
+    border-radius:14px;
+    cursor:pointer;
+    position:relative;
+    overflow:hidden;
+    box-shadow:0 14px 34px -14px rgba(255,90,0,.65);
+    transition:transform .2s,box-shadow .2s;
+  }
+  .btn-fire:hover{transform:translateY(-2px) rotate(-.6deg);box-shadow:0 20px 44px -16px rgba(255,90,0,.8)}
+  .btn-fire:active{transform:translateY(1px) scale(.985)}
+  .btn-fire:disabled{opacity:.85;cursor:wait;transform:none}
+  .btn-fire::after{
+    content:"";
+    position:absolute;
+    top:-60%;left:-40%;
+    width:38%;height:220%;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent);
+    transform:rotate(18deg);
+    animation:shine 3.6s ease-in-out infinite;
+    pointer-events:none;
+  }
+
+  .btn-small{padding:11px 18px;font-size:.9rem;display:inline-flex;align-items:center;gap:8px}
+
+  .dice{display:inline-block;animation:spin 4.5s linear infinite;font-size:1.15em;line-height:1}
+  .btn-fire:hover .dice{animation-duration:1s}
+
+  .hero{padding:88px 0 64px;position:relative}
+
+  .hero-inner{position:relative;text-align:center}
+
+  .seal{
+    position:absolute;
+    top:46%;
+    left:50%;
+    width:min(580px,82vw);
+    aspect-ratio:1;
+    transform:translate(-50%,-50%);
+    border:1px dashed rgba(255,176,32,.18);
+    border-radius:50%;
+    display:grid;
+    place-items:center;
+    z-index:0;
+    pointer-events:none;
+    animation:spin 46s linear infinite;
+  }
+
+  .seal::before{
+    content:"";
+    position:absolute;
+    inset:8%;
+    border:1px dotted rgba(255,176,32,.12);
+    border-radius:50%;
+  }
+
+  .seal span{
+    display:block;
+    font-size:clamp(9rem,22vw,15rem);
+    font-weight:800;
+    letter-spacing:.04em;
+    color:rgba(255,176,32,.05);
+    line-height:1;
+    animation:spinRev 30s linear infinite;
+  }
+
+  .badge,
+  .hero-sub,
+  .stats,
+  .hero h1{position:relative;z-index:1}
+
+  .badge{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:24px;
+    padding:9px 16px;
+    font-size:.78rem;
+    font-weight:500;
+    letter-spacing:.05em;
+    color:#ffd9a8;
+    background:rgba(22,13,7,.6);
+    border:1px solid rgba(255,176,32,.32);
+    border-radius:999px;
+    backdrop-filter:blur(8px);
+    -webkit-backdrop-filter:blur(8px);
+  }
+
+  .badge-dot{
+    width:8px;height:8px;border-radius:50%;
+    background:radial-gradient(circle at 35% 35%,#ffe08a,#ff6b2c 60%,#e8253f);
+    animation:pulse 1.8s ease-out infinite;
+    flex-shrink:0;
+  }
+
+  .hero h1{
+    font-size:clamp(2.2rem,5.4vw,4.2rem);
+    line-height:1.16;
+    font-weight:800;
+    letter-spacing:-.02em;
+    max-width:940px;
+    margin:0 auto 20px;
+  }
+
+  .fire-text{
+    background:var(--fire-grad);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    filter:drop-shadow(0 4px 24px rgba(255,90,0,.35));
+  }
+
+  .gold-text{
+    background:var(--gold-grad);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    filter:drop-shadow(0 4px 24px rgba(255,176,32,.3));
+  }
+
+  .hero-sub{
+    color:var(--muted);
+    max-width:680px;
+    margin:0 auto;
+    font-size:clamp(.95rem,1.6vw,1.08rem);
+    line-height:1.85;
+    font-weight:300;
+  }
+
+  .stats{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:12px;
+    margin-top:36px;
+  }
+
+  .stat{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:2px;
+    min-width:158px;
+    padding:12px 20px;
+    background:rgba(22,13,7,.72);
+    border:1px solid var(--line);
+    border-radius:16px;
+    backdrop-filter:blur(8px);
+    -webkit-backdrop-filter:blur(8px);
+  }
+
+  .stat-num{
+    font-size:1.7rem;
+    font-weight:800;
+    line-height:1.2;
+    background:var(--gold-grad);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    font-variant-numeric:tabular-nums;
+  }
+
+  .stat-label{font-size:.76rem;color:var(--muted);letter-spacing:.04em}
+
+  .section-head{
+    text-align:center;
+    max-width:680px;
+    margin:0 auto 38px;
+  }
+
+  .kicker{
+    display:inline-block;
+    color:var(--gold);
+    font-size:.74rem;
+    font-weight:600;
+    letter-spacing:.24em;
+    text-transform:uppercase;
+    margin-bottom:12px;
+  }
+
+  .section-head h2,
+  .cta-text h2{
+    font-size:clamp(1.8rem,4vw,2.9rem);
+    line-height:1.22;
+    font-weight:800;
+    letter-spacing:-.01em;
+  }
+
+  .section-head p{
+    color:var(--muted);
+    margin-top:12px;
+    line-height:1.8;
+    font-size:.96rem;
+    font-weight:300;
+  }
+
+  .menu-section{padding-top:30px}
+
+  .dumpster{
+    position:relative;
+    display:grid;
+    grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);
+    gap:26px;
+    padding:34px 20px 20px;
+    background:linear-gradient(160deg,#1b1008 0%,#140b06 55%,#1e1108 100%);
+    border:1px solid rgba(255,150,70,.24);
+    border-radius:30px;
+    box-shadow:var(--shadow-fire),inset 0 1px 0 rgba(255,255,255,.06);
+    overflow:hidden;
+  }
+
+  .dumpster::before,
+  .dumpster::after{
+    content:"";
+    position:absolute;
+    left:0;right:0;
+    height:9px;
+    background:var(--hazard);
+    opacity:.85;
+    z-index:3;
+  }
+  .dumpster::before{top:0}
+  .dumpster::after{bottom:0}
+
+  .dumpster.mega{animation:cardSpin 1s cubic-bezier(.3,1.2,.4,1)}
+  .dumpster.mega .food-img{animation:imgSpin 1s cubic-bezier(.3,1.1,.4,1)}
+  .dumpster.mega .food-emoji{animation-duration:.7s}
+
+  .media-stage{position:relative}
+
+  .orbit-ring{
+    position:absolute;
+    inset:-12px;
+    border:1px dashed rgba(255,176,32,.28);
+    border-radius:28px;
+    animation:spin 34s linear infinite;
+    pointer-events:none;
+  }
+
+  .orbiter{
+    position:absolute;
+    z-index:3;
+    font-size:1.4rem;
+    line-height:1;
+    animation:spin 8s linear infinite;
+    filter:drop-shadow(0 0 12px rgba(255,130,40,.5));
+    pointer-events:none;
+  }
+  .o1{top:-12px;right:10px;animation-duration:8s}
+  .o2{top:44%;right:-12px;animation-duration:6.5s;animation-direction:reverse}
+  .o3{top:40%;left:-12px;animation-duration:9s}
+  .o4{bottom:-10px;left:18px;animation-duration:7.5s;animation-direction:reverse}
+
+  .food-media{
+    position:relative;
+    height:clamp(340px,52vw,540px);
+    border-radius:22px;
+    overflow:hidden;
+    border:1px solid rgba(255,150,70,.22);
+    background:#0a0503;
+    box-shadow:inset 0 0 80px rgba(0,0,0,.6);
+  }
+
+  .food-img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transform:scale(1.01);
+    transition:transform .8s cubic-bezier(.2,.7,.2,1);
+  }
+
+  .dumpster:hover .food-img{transform:scale(1.05)}
+
+  .flames{
+    position:absolute;
+    left:0;right:0;bottom:0;
+    height:46%;
+    pointer-events:none;
+    background:
+      radial-gradient(130px 95px at 18% 100%,rgba(255,107,44,.55),transparent 70%),
+      radial-gradient(150px 110px at 54% 100%,rgba(232,37,63,.45),transparent 72%),
+      radial-gradient(120px 85px at 86% 100%,rgba(255,209,102,.5),transparent 70%);
+    filter:blur(7px);
+    animation:flicker 2.2s ease-in-out infinite;
+  }
+
+  .cat-chip{
+    position:absolute;
+    top:14px;left:14px;
+    padding:7px 13px;
+    font-size:.72rem;
+    font-weight:600;
+    letter-spacing:.12em;
+    color:#ffd9a8;
+    background:rgba(9,5,3,.72);
+    border:1px solid rgba(255,176,32,.4);
+    border-radius:999px;
+    backdrop-filter:blur(8px);
+    -webkit-backdrop-filter:blur(8px);
+  }
+
+  .food-emoji{
+    position:absolute;
+    right:16px;bottom:16px;
+    width:60px;height:60px;
+    border-radius:50%;
+    display:grid;
+    place-items:center;
+    font-size:1.7rem;
+    background:rgba(9,5,3,.75);
+    border:1px solid rgba(255,176,32,.45);
+    box-shadow:0 0 30px rgba(255,120,30,.35);
+    backdrop-filter:blur(6px);
+    -webkit-backdrop-filter:blur(6px);
+    animation:spin 12s linear infinite;
+  }
+
+  .food-info{
+    display:flex;
+    flex-direction:column;
+    padding:8px 6px 4px;
+  }
+
+  .eyebrow{
+    font-size:.7rem;
+    font-weight:600;
+    letter-spacing:.2em;
+    color:var(--gold);
+    text-transform:uppercase;
+  }
+
+  .food-name{
+    margin-top:10px;
+    font-size:clamp(1.9rem,3.4vw,2.8rem);
+    line-height:1.15;
+    font-weight:800;
+    letter-spacing:-.015em;
+    color:#fff3e0;
+    text-shadow:0 0 30px rgba(255,140,40,.25);
+  }
+
+  .food-desc{
+    margin-top:12px;
+    color:var(--muted);
+    font-size:.96rem;
+    line-height:1.8;
+    font-weight:300;
+  }
+
+  .price-row{
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+    gap:12px;
+    flex-wrap:wrap;
+    margin-top:18px;
+    padding-top:16px;
+    border-top:1px dashed rgba(255,176,32,.22);
+  }
+
+  .price{
+    font-size:2rem;
+    font-weight:800;
+    line-height:1;
+    background:var(--fire-grad);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    font-variant-numeric:tabular-nums;
+  }
+
+  .price-note{font-size:.72rem;color:var(--muted);opacity:.8}
+
+  .random-btn{
+    width:100%;
+    margin-top:20px;
+    padding:16px 22px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    font-size:1.04rem;
+    border-radius:16px;
+    position:relative;
+    z-index:4;
+    transition:transform .45s cubic-bezier(.34,1.56,.64,1),box-shadow .2s;
+    will-change:transform;
+  }
+
+  .random-btn.taunting{
+    box-shadow:0 0 0 2px rgba(255,176,32,.45),0 18px 44px -16px rgba(255,90,0,.85);
+  }
+
+  .thumbs-wrap{margin-top:20px}
+
+  .thumbs-label{
+    display:block;
+    font-size:.68rem;
+    font-weight:600;
+    letter-spacing:.2em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:10px;
+  }
+
+  .thumbs{display:flex;flex-wrap:wrap;gap:10px}
+
+  .thumb{
+    width:52px;height:52px;
+    padding:0;
+    border-radius:14px;
+    overflow:hidden;
+    border:2px solid transparent;
+    background:#0a0503;
+    cursor:pointer;
+    transition:transform .2s,border-color .2s,box-shadow .2s;
+  }
+
+  .thumb img{width:100%;height:100%;object-fit:cover;opacity:.78;transition:opacity .2s}
+
+  .thumb:hover{transform:rotate(8deg) scale(1.06)}
+  .thumb:hover img{opacity:1}
+
+  .thumb.active{
+    border-color:var(--gold);
+    box-shadow:0 0 0 3px rgba(255,176,32,.22),0 8px 20px -8px rgba(255,120,30,.6);
+  }
+  .thumb.active img{opacity:1}
+
+  .live{
+    margin-top:16px;
+    font-size:.76rem;
+    line-height:1.6;
+    color:var(--muted);
+    opacity:.85;
+  }
+
+  .steps-section{padding-top:88px}
+
+  .steps{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:18px;
+  }
+
+  .step{
+    position:relative;
+    overflow:hidden;
+    padding:26px 24px 24px;
+    background:linear-gradient(160deg,#170e08,#120a06);
+    border:1px solid var(--line);
+    border-radius:22px;
+    transition:transform .25s,border-color .25s;
+  }
+
+  .step:hover{transform:translateY(-5px) rotate(-.4deg);border-color:rgba(255,176,32,.4)}
+
+  .step-num{
+    position:absolute;
+    top:10px;right:18px;
+    font-size:3.2rem;
+    font-weight:800;
+    line-height:1;
+    color:rgba(255,176,32,.08);
+    font-variant-numeric:tabular-nums;
+  }
+
+  .step-icon{
+    width:56px;height:56px;
+    border-radius:50%;
+    display:grid;
+    place-items:center;
+    font-size:1.5rem;
+    background:radial-gradient(circle at 40% 30%,rgba(255,176,32,.18),rgba(255,107,44,.08));
+    border:1px solid rgba(255,176,32,.3);
+    box-shadow:inset 0 0 22px rgba(255,140,40,.15);
+    margin-bottom:16px;
+    animation:spin 11s linear infinite;
+  }
+
+  .step h3{font-size:1.12rem;color:#ffe9d2;margin-bottom:8px}
+
+  .step p{color:var(--muted);font-size:.92rem;line-height:1.75;font-weight:300}
+
+  .tape-wrap{
+    margin-top:86px;
+    overflow:hidden;
+    transform:rotate(-1.4deg) scale(1.03);
+    border-top:1px solid rgba(255,176,32,.18);
+    border-bottom:1px solid rgba(255,176,32,.18);
+    background:rgba(18,10,6,.9);
+  }
+
+  .tape-track{display:flex;width:max-content;animation:tapeScroll 26s linear infinite}
+
+  .tape-group{
+    display:flex;
+    align-items:center;
+    gap:38px;
+    padding:13px 19px;
+    font-size:.85rem;
+    font-weight:600;
+    letter-spacing:.18em;
+    color:var(--gold);
+    white-space:nowrap;
+  }
+
+  .cta-section{padding:84px 0 0}
+
+  .cta-banner{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:28px;
+    padding:clamp(30px,5vw,54px);
+    background:linear-gradient(120deg,#1b0f07 0%,#241105 45%,#2a0c09 100%);
+    border:1px solid rgba(255,176,32,.25);
+    border-radius:28px;
+    box-shadow:var(--shadow-fire);
+  }
+
+  .cta-text h2{margin-top:8px;margin-bottom:10px}
+
+  .cta-text p{color:var(--muted);line-height:1.8;max-width:520px;font-size:.95rem;font-weight:300}
+
+  .cta-btn{
+    flex-shrink:0;
+    padding:18px 34px;
+    font-size:1.08rem;
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    border-radius:16px;
+  }
+
+  footer{
+    margin-top:92px;
+    padding:54px 0 40px;
+    border-top:1px solid var(--line);
+    text-align:center;
+    background:linear-gradient(180deg,transparent,rgba(255,107,44,.04));
+  }
+
+  .foot-brand{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    font-weight:700;
+    font-size:1.05rem;
+    margin-bottom:12px;
+  }
+
+  .foot-brand .crown{font-size:1.3rem}
+
+  .foot-brand span:last-child{
+    background:var(--gold-grad);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+
+  footer p{color:var(--muted);font-size:.9rem;margin:4px auto;line-height:1.7;font-weight:300}
+
+  .foot-note{margin-top:14px!important;font-size:.78rem!important;opacity:.65}
+
+  .ember{
+    position:fixed;
+    bottom:-24px;
+    left:var(--x);
+    font-size:var(--s);
+    opacity:0;
+    z-index:5;
+    pointer-events:none;
+    animation:rise var(--d) linear forwards;
+    filter:drop-shadow(0 0 6px rgba(255,140,60,.8));
+  }
+
+  .burst-bit{
+    position:fixed;
+    z-index:60;
+    pointer-events:none;
+    font-size:var(--bs);
+    left:0;top:0;
+    animation:burst .9s ease-out forwards;
+  }
+
+  .stink{
+    position:absolute;
+    inset:0;
+    z-index:2;
+    overflow:hidden;
+    pointer-events:none;
+    mix-blend-mode:screen;
+  }
+
+  .stink span{
+    position:absolute;
+    bottom:-14%;
+    width:42%;
+    aspect-ratio:1;
+    border-radius:50%;
+    background:radial-gradient(circle at 42% 42%,rgba(170,255,170,.85),rgba(64,200,104,.42) 55%,rgba(24,80,40,0) 72%);
+    filter:blur(9px);
+    opacity:0;
+    animation:stink-rise 3.4s ease-in infinite;
+  }
+
+  .stink span:nth-child(1){left:2%}
+  .stink span:nth-child(2){left:28%;width:30%;animation-duration:4.1s;animation-delay:.9s}
+  .stink span:nth-child(3){left:56%;width:36%;animation-duration:3.7s;animation-delay:1.7s}
+  .stink span:nth-child(4){left:78%;width:26%;animation-duration:4.6s;animation-delay:2.4s}
+
+  .cat-chip,.food-emoji{z-index:3}
+
+  .garbage-truck{
+    position:fixed;
+    left:0;
+    bottom:2vh;
+    width:min(58vw,820px);
+    aspect-ratio:2.6;
+    z-index:55;
+    pointer-events:none;
+    filter:drop-shadow(0 26px 24px rgba(0,0,0,.55));
+    animation:truck-pass 2s linear infinite;
+    will-change:transform;
+  }
+
+  .gt-bed{
+    position:absolute;
+    left:0;
+    bottom:15%;
+    width:66%;
+    height:70%;
+    overflow:hidden;
+    background:linear-gradient(165deg,#3d9c5e 0%,#1f6a3d 55%,#123f26 100%);
+    border:4px solid #082417;
+    border-radius:14px 10px 8px 8px;
+    box-shadow:inset 0 10px 0 rgba(255,255,255,.12),inset 0 -12px 0 rgba(0,0,0,.3);
+  }
+
+  .gt-bed::before{
+    content:"";
+    position:absolute;
+    top:-8%;
+    left:-4%;
+    width:112%;
+    height:42%;
+    background:repeating-linear-gradient(-45deg,rgba(255,176,32,.9) 0 12px,rgba(11,6,4,.9) 12px 24px);
+    opacity:.45;
+  }
+
+  .gt-bed span{
+    position:absolute;
+    inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:800;
+    font-size:clamp(18px,3.2vw,50px);
+    letter-spacing:.06em;
+    color:#e6ffed;
+    text-shadow:0 4px 0 rgba(0,0,0,.35);
+    transform:rotate(-5deg);
+  }
+
+  .gt-cab{
+    position:absolute;
+    right:0;
+    bottom:15%;
+    width:31%;
+    height:52%;
+    background:linear-gradient(165deg,#59c97e,#247a48 60%,#15512f);
+    border:4px solid #082417;
+    border-radius:10px 18px 6px 6px;
+    box-shadow:inset 0 8px 0 rgba(255,255,255,.14);
+  }
+
+  .gt-window{
+    position:absolute;
+    left:12%;
+    top:12%;
+    width:64%;
+    height:38%;
+    background:linear-gradient(180deg,#d7f2ff,#7bc8ea 70%,#4b9fc6);
+    border:3px solid #082417;
+    border-radius:8px;
+  }
+
+  .gt-grill{
+    position:absolute;
+    left:8%;
+    bottom:10%;
+    width:30%;
+    height:22%;
+    background:repeating-linear-gradient(90deg,#0f3a22 0 6px,#2c6b43 6px 12px);
+    border-radius:4px;
+  }
+
+  .gt-wheel{
+    position:absolute;
+    bottom:0;
+    width:17%;
+    aspect-ratio:1;
+    border-radius:50%;
+    background:radial-gradient(circle,#a9b2ad 0 30%,#252d29 31% 64%,#0a0f0c 65% 100%);
+    box-shadow:inset 0 0 0 4px #05140b;
+    animation:gt-spin .38s linear infinite;
+  }
+
+  .gt-wheel-a{left:6%}
+  .gt-wheel-b{left:46%}
+  .gt-wheel-c{right:4%;width:14%}
+
+  .nav-wrap,main,footer{
+    animation:world-dizzy 22s ease-in-out infinite;
+    transform-origin:50% 45%;
+  }
+
+  @keyframes stink-rise{
+    0%{transform:translate(-18%,8%) scale(.55) rotate(-8deg);opacity:0}
+    16%{opacity:.95}
+    60%{opacity:.7}
+    100%{transform:translate(-62%,-135%) scale(1.7) rotate(18deg);opacity:0}
+  }
+
+  @keyframes gt-spin{
+    to{transform:rotate(360deg)}
+  }
+
+  @keyframes truck-pass{
+    0%{transform:translateX(-125%) scaleX(1)}
+    49.99%{transform:translateX(calc(100vw + 25%)) scaleX(1)}
+    50%{transform:translateX(calc(100vw + 25%)) scaleX(-1)}
+    100%{transform:translateX(-125%) scaleX(-1)}
+  }
+
+  @keyframes world-dizzy{
+    0%,100%{transform:scale(1) rotate(0deg) translate3d(0,0,0)}
+    9%{transform:scale(1.38) rotate(2.6deg) translate3d(24px,-18px,0)}
+    20%{transform:scale(.78) rotate(-2.5deg) translate3d(-22px,20px,0)}
+    31%{transform:scale(1.42) rotate(2.8deg) translate3d(26px,16px,0)}
+    42%{transform:scale(.74) rotate(-2.8deg) translate3d(-26px,-20px,0)}
+    53%{transform:scale(1.34) rotate(2.2deg) translate3d(20px,22px,0)}
+    64%{transform:scale(.8) rotate(-2.3deg) translate3d(-24px,17px,0)}
+    75%{transform:scale(1.36) rotate(2.5deg) translate3d(22px,-22px,0)}
+    86%{transform:scale(.82) rotate(-2.1deg) translate3d(-20px,-16px,0)}
+    94%{transform:scale(1.22) rotate(1.6deg) translate3d(14px,12px,0)}
+  }
+
+  @keyframes spin{to{transform:rotate(360deg)}}
+  @keyframes spinRev{to{transform:rotate(-360deg)}}
+
+  @keyframes pulse{
+    0%{box-shadow:0 0 0 0 rgba(255,107,44,.55)}
+    70%{box-shadow:0 0 0 10px rgba(255,107,44,0)}
+    100%{box-shadow:0 0 0 0 rgba(255,107,44,0)}
+  }
+
+  @keyframes flicker{
+    0%,100%{opacity:.7;transform:scaleY(1)}
+    35%{opacity:1;transform:scaleY(1.08)}
+    60%{opacity:.82;transform:scaleY(.96)}
+    80%{opacity:.95;transform:scaleY(1.04)}
+  }
+
+  @keyframes shine{
+    0%,55%{left:-40%}
+    100%{left:120%}
+  }
+
+  @keyframes drift{
+    to{transform:translate3d(4vw,5vh,0) scale(1.12)}
+  }
+
+  @keyframes cardSpin{
+    0%{transform:rotate(0) scale(1)}
+    50%{transform:rotate(180deg) scale(.985)}
+    100%{transform:rotate(360deg) scale(1)}
+  }
+
+  @keyframes imgSpin{
+    0%{transform:scale(1.01) rotate(0)}
+    100%{transform:scale(1.01) rotate(-540deg)}
+  }
+
+  @keyframes tapeScroll{
+    to{transform:translateX(-50%)}
+  }
+
+  @keyframes rise{
+    0%{opacity:0;transform:translate3d(0,0,0) rotate(0)}
+    10%{opacity:.9}
+    100%{opacity:0;transform:translate3d(var(--dx),-110vh,0) rotate(var(--rot))}
+  }
+
+  @keyframes burst{
+    0%{transform:translate(-50%,-50%) scale(.4) rotate(0);opacity:1}
+    100%{transform:translate(calc(-50% + var(--bx)),calc(-50% + var(--by))) scale(1.4) rotate(var(--br));opacity:0}
+  }
+
+  @media (max-width:1024px){
+    .dumpster{grid-template-columns:1fr}
+    .food-media{height:clamp(320px,58vw,480px)}
+    .steps{grid-template-columns:1fr}
+  }
+
+  @media (max-width:720px){
+    .nav-links{display:none}
+    .hero{padding-top:64px}
+    .brand-text small{display:none}
+    .stat{min-width:0;flex:1;padding:10px 14px}
+    .stat-num{font-size:1.35rem}
+    .tape-wrap{margin-top:64px}
+    .cta-banner{padding:30px 24px}
+    .btn-small{padding:10px 14px;font-size:.82rem}
+  }
+
+  @media (max-width:560px){
+    .dumpster{padding:28px 16px 16px;border-radius:24px}
+    .food-info{padding:6px 2px 2px}
+    .random-btn{font-size:.98rem}
+    .thumbs{margin-top:12px}
+    .food-emoji{width:52px;height:52px;font-size:1.45rem}
+    .price{font-size:1.7rem}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *,*::before,*::after{
+      animation-duration:.001ms!important;
+      animation-iteration-count:1!important;
+      transition-duration:.001ms!important;
+    }
+    html{scroll-behavior:auto}
+    .garbage-truck{display:none}
+    .stink{display:none}
+  }
+</style>
+</head>
+<body>
+
+<div class="glow glow-a" aria-hidden="true"></div>
+<div class="glow glow-b" aria-hidden="true"></div>
+
+<header class="nav-wrap">
+  <div class="container nav">
+    <a class="brand" href="#home">
+      <span class="crown" aria-hidden="true">♛</span>
+      <span class="brand-text">ราชา TRIPLE THREE<small>BURNING WASTE PALACE · กองที่ 333</small></span>
+    </a>
+    <nav class="nav-links" aria-label="เมนูหลัก">
+      <a href="#home">ห้องโถงเพลิง</a>
+      <a href="#menu">กองขยะหลวง</a>
+      <a href="#how">พิธี 3 ขั้น</a>
+      <a href="#about">ราชา</a>
+    </nav>
+    <button class="btn-fire btn-small" id="navRandom" type="button"><span class="dice" aria-hidden="true">🌀</span> หมุนเลย</button>
+  </div>
+</header>
+
+<main id="home">
+
+  <section class="hero">
+    <div class="container hero-inner">
+      <div class="seal" aria-hidden="true"><span>333</span></div>
+      <span class="badge"><span class="badge-dot" aria-hidden="true"></span> ประกาศราชสำนัก · กองขยะกองที่ 333 กำลังลุกไหม้</span>
+      <h1>โรงเก็บขยะ<span class="fire-text">ที่ไฟไหม้</span><br>ของราชา <span class="gold-text">TRIPLE THREE</span></h1>
+      <p class="hero-sub">ยินดีต้อนรับสู่โรงเก็บขยะหลวงที่ไฟไม่เคยดับและทุกอย่างหมุนตลอดเวลา — กดปุ่ม แล้วปล่อยให้ราชาทั้งสามพระองค์เสี่ยงทายเมนูจากกองเพลิงให้คุณ</p>
+      <div class="stats">
+        <div class="stat"><span class="stat-num">3</span><span class="stat-label">พระองค์ผู้ครองขยะ</span></div>
+        <div class="stat"><span class="stat-num">33</span><span class="stat-label">ปีที่ไฟไม่เคยดับ</span></div>
+        <div class="stat"><span class="stat-num" id="spinCount">0</span><span class="stat-label">รอบที่โลกหมุนให้ราชา</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="menu-section" id="menu">
+    <div class="container">
+      <div class="section-head">
+        <span class="kicker">กองขยะหลวง · กองที่ 333</span>
+        <h2>หยิบเมนูจาก<span class="fire-text">กองเพลิง</span></h2>
+        <p>ของดีมักซ่อนอยู่ใต้ขยะที่ยังอุ่น ๆ — ราชาจะหมุนกองขยะให้จนกว่าจะเจอสิ่งที่สมควรกิน</p>
+      </div>
+
+      <article class="dumpster" id="foodCard">
+        <div class="media-stage">
+          <div class="orbit-ring" aria-hidden="true"></div>
+          <span class="orbiter o1" aria-hidden="true">🗑️</span>
+          <span class="orbiter o2" aria-hidden="true">🌀</span>
+          <span class="orbiter o3" aria-hidden="true">♛</span>
+          <span class="orbiter o4" aria-hidden="true">🔥</span>
+          <div class="food-media">
+            <img id="foodImg" class="food-img" src="images.jpg" alt="ข้าวผัดรมควันจากกองขยะหลวง" width="1200" height="900">
+            <div class="flames" aria-hidden="true"></div>
+            <div class="stink" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+            <span class="cat-chip" id="foodCat">จานหลัก</span>
+            <span class="food-emoji" id="foodEmoji" aria-hidden="true">🍚</span>
+          </div>
+        </div>
+        <div class="food-info">
+          <span class="eyebrow">♛ เมนูจากกองขยะหลวง</span>
+          <h3 class="food-name" id="foodName">ข้าวผัดกองขยะหลวง</h3>
+          <p class="food-desc" id="foodDesc">ข้าวผัดกระทะร้อนจากเตาถ่านกองที่ 333 หอมกลิ่นรมควันจนราชาต้องเสด็จมาเอง</p>
+          <div class="price-row">
+            <span class="price" id="foodPrice">฿55</span>
+            <span class="price-note">ราคาหน้าถัง · ไม่รวมค่าไฟ</span>
+          </div>
+          <button class="btn-fire random-btn" id="randomBtn" type="button"><span class="dice" aria-hidden="true">🌀</span><span id="randomLabel">หมุนเมนูให้ราชาเลือก</span></button>
+          <div class="thumbs-wrap">
+            <span class="thumbs-label">ถังขยะทั้ง 6</span>
+            <div class="thumbs" id="thumbs"></div>
+          </div>
+          <span class="live" id="liveStatus" role="status" aria-live="polite">กดปุ่มหมุนเพื่อให้ราชา TRIPLE THREE เลือกเมนูจากกองเพลิง</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="steps-section" id="how">
+    <div class="container">
+      <div class="section-head">
+        <span class="kicker">ธรรมเนียมราชสำนัก</span>
+        <h2>พิธีกรรม <span class="gold-text">3 ขั้นตอน</span></h2>
+        <p>หมุน หมุน หมุน แล้วก็กิน — อย่าลืมหมุน</p>
+      </div>
+      <div class="steps">
+        <article class="step">
+          <span class="step-num" aria-hidden="true">01</span>
+          <span class="step-icon" aria-hidden="true">🌀</span>
+          <h3>หมุนกองขยะ</h3>
+          <p>กดปุ่มแล้วปล่อยให้ทุกอย่างหมุน โลกจะหมุนตามคุณ หรือคุณจะหมุนตามโลกก็ได้</p>
+        </article>
+        <article class="step">
+          <span class="step-num" aria-hidden="true">02</span>
+          <span class="step-icon" aria-hidden="true">🔥</span>
+          <h3>ลุ้นของดีในกองเพลิง</h3>
+          <p>ราชาทั้งสามพระองค์จะชี้เมนูที่โผล่พ้นเปลวไฟมา ถ้าไม่ชอบก็หมุนใหม่ ไม่มีใครห้าม</p>
+        </article>
+        <article class="step">
+          <span class="step-num" aria-hidden="true">03</span>
+          <span class="step-icon" aria-hidden="true">♛</span>
+          <h3>กินให้เกลี้ยงถัง</h3>
+          <p>อย่าทิ้งขยะให้ราชาโมโห กินให้หมดแล้วหมุนต่ออีกสักรอบเพื่อเป็นเกียรติ</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <div class="tape-wrap" aria-hidden="true">
+    <div class="tape">
+      <div class="tape-track">
+        <div class="tape-group">
+          <span>♛ TRIPLE THREE</span><span>🔥 BURNING WASTE PALACE</span><span>🌀 หมุนไม่หยุด</span><span>🗑️ กองที่ 333</span><span>♛ TRIPLE THREE</span><span>🔥 ขยะเพลิงหลวง</span>
+        </div>
+        <div class="tape-group">
+          <span>♛ TRIPLE THREE</span><span>🔥 BURNING WASTE PALACE</span><span>🌀 หมุนไม่หยุด</span><span>🗑️ กองที่ 333</span><span>♛ TRIPLE THREE</span><span>🔥 ขยะเพลิงหลวง</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-banner">
+        <div class="cta-text">
+          <span class="kicker">ราชโองการสุดท้าย</span>
+          <h2>ยังไม่กล้าหยิบอยู่ไหม?</h2>
+          <p>โรงเก็บขยะจะหมุนต่อไปจนกว่าคุณจะเลือก — ไฟก็จะลุกต่อไปจนกว่าจะหมดถัง</p>
+        </div>
+        <button class="btn-fire cta-btn" id="ctaBtn" type="button"><span class="dice" aria-hidden="true">🌀</span> หมุนเลย!</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer id="about">
+  <div class="container">
+    <div class="foot-brand"><span class="crown" aria-hidden="true">♛</span><span>ราชา TRIPLE THREE</span></div>
+    <p>โรงเก็บขยะเพลิงแห่งกองที่ 333 — ไฟลุก หมุนตลอด 24 ชั่วโมง</p>
+    <p class="foot-note">© 2026 ราชา TRIPLE THREE · ขยะทุกชิ้นหมุนได้ 🌀</p>
+  </div>
+</footer>
+
+<div class="garbage-truck" aria-hidden="true">
+  <div class="gt-bed"><span>ขยะสด</span></div>
+  <div class="gt-cab"><span class="gt-window"></span><span class="gt-grill"></span></div>
+  <span class="gt-wheel gt-wheel-a"></span>
+  <span class="gt-wheel gt-wheel-b"></span>
+  <span class="gt-wheel gt-wheel-c"></span>
+</div>
+
+<script>
+  const menus = [
+    {
+      name: "ข้าวผัดกองขยะหลวง",
+      desc: "ข้าวผัดกระทะร้อนจากเตาถ่านกองที่ 333 หอมกลิ่นรมควันจนราชาต้องเสด็จมาเอง",
+      price: 55,
+      cat: "จานหลัก",
+      emoji: "🍚",
+      img: "images.jpg",
+      alt: "ข้าวผัดรมควันจากกองขยะหลวง"
+    },
+    {
+      name: "ราเมงถังขยะเพลิง",
+      desc: "ราเมงน้ำซุปเข้ม เสิร์ฟในถังที่ยังอุ่น ๆ จากกองเพลิงหลวง",
+      price: 75,
+      cat: "น้ำซุป",
+      emoji: "🍜",
+      img: "Tung-Tung-Tung-Sahur-PNG-HD.jpg",
+      alt: "ราเมงน้ำซุปเข้มในถังเพลิง"
+    },
+    {
+      name: "สลัดเถ้าถ่าน",
+      desc: "ผักสดกรอบคลุกน้ำสลัดเถ้าถ่านสูตรราชสำนัก กินแล้วเหมือนได้เกิดใหม่",
+      price: 65,
+      cat: "ของสด",
+      emoji: "🥗",
+      img: "thaiflag.jpg",
+      alt: "สลัดผักกรอบคลุกเถ้าถ่าน"
+    },
+    {
+      name: "สเต๊ก burnt ends",
+      desc: "สเต๊กไหม้เกรียมกำลังดี ราดซอสเพลิง 3 ชั้นตามพระบัญชา",
+      price: 129,
+      cat: "ปิ้งย่าง",
+      emoji: "🥩",
+      img: "gordon.jpg",
+      alt: "สเต๊กไหม้เกรียมราดซอสเพลิง"
+    },
+    {
+      name: "บะหมี่เพลิงคลั่ง",
+      desc: "เส้นบะหมี่ลวกในหม้อที่ไฟไม่เคยดับ กลิ่นไหม้คือเอกลักษณ์",
+      price: 69,
+      cat: "เส้น",
+      emoji: "🍥",
+      img: "pngtree-garbage-truck-side-view-png-image_6099874.jpg",
+      alt: "บะหมี่เพลิงคลั่งในชามดำ"
+    },
+    {
+      name: "คับบี้แพทตี้เพลิง",
+      desc: "เบอร์เกอร์ปูยักษ์ย่างบนถังขยะที่ยังคุอยู่ เนื้อปูแน่น ๆ ราดซอสเพลิงลาวา",
+      price: 99,
+      cat: "จานหลัก",
+      emoji: "🍔",
+      img: "triple three.jpg",
+      alt: "คับบี้แพทตี้เบอร์เกอร์ปูยักษ์จากกองเพลิง"
+    }
+  ];
+
+  const foodImg = document.getElementById("foodImg");
+  const foodEmoji = document.getElementById("foodEmoji");
+  const foodCat = document.getElementById("foodCat");
+  const foodName = document.getElementById("foodName");
+  const foodDesc = document.getElementById("foodDesc");
+  const foodPrice = document.getElementById("foodPrice");
+  const thumbsEl = document.getElementById("thumbs");
+  const liveEl = document.getElementById("liveStatus");
+  const spinCountEl = document.getElementById("spinCount");
+  const cardEl = document.getElementById("foodCard");
+  const randomBtn = document.getElementById("randomBtn");
+  const randomLabel = document.getElementById("randomLabel");
+
+  let current = Math.floor(Math.random() * menus.length);
+  let rolling = false;
+  let totalSpins = 0;
+
+  function renderMenu(index) {
+    const m = menus[index];
+    foodImg.src = m.img;
+    foodImg.alt = m.alt;
+    foodEmoji.textContent = m.emoji;
+    foodCat.textContent = m.cat;
+    foodName.textContent = m.name;
+    foodDesc.textContent = m.desc;
+    foodPrice.textContent = "฿" + m.price;
+    Array.from(thumbsEl.children).forEach(function (btn, i) {
+      btn.classList.toggle("active", i === index);
+    });
+  }
+
+  function buildThumbs() {
+    menus.forEach(function (m, i) {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "thumb";
+      btn.setAttribute("aria-label", "เลือก " + m.name);
+      btn.innerHTML = '<img src="' + m.img + '" alt="" loading="lazy">';
+      btn.addEventListener("click", function () { choose(i); });
+      thumbsEl.appendChild(btn);
+    });
+  }
+
+  function makeEmber() {
+    if (document.querySelectorAll(".ember").length > 26) return;
+    const e = document.createElement("span");
+    e.className = "ember";
+    const pool = ["🔥", "✨", "🗑️", "♛", "•", "•", "•"];
+    e.textContent = pool[Math.floor(Math.random() * pool.length)];
+    e.style.setProperty("--x", (Math.random() * 100).toFixed(1) + "vw");
+    e.style.setProperty("--s", (10 + Math.random() * 16).toFixed(0) + "px");
+    e.style.setProperty("--d", (6 + Math.random() * 6).toFixed(1) + "s");
+    e.style.setProperty("--dx", (Math.random() * 160 - 80).toFixed(0) + "px");
+    e.style.setProperty("--rot", (Math.random() * 720 - 360).toFixed(0) + "deg");
+    e.addEventListener("animationend", function () { e.remove(); });
+    document.body.appendChild(e);
+  }
+
+  function burst(target) {
+    const rect = target.getBoundingClientRect();
+    const bits = ["🔥", "🗑️", "🍌", "♛", "🌀", "💥", "🥫", "🧃"];
+    for (let i = 0; i < 10; i++) {
+      const b = document.createElement("span");
+      b.className = "burst-bit";
+      b.textContent = bits[Math.floor(Math.random() * bits.length)];
+      b.style.left = (rect.left + rect.width / 2) + "px";
+      b.style.top = (rect.top + rect.height / 2) + "px";
+      b.style.setProperty("--bx", (Math.random() * 260 - 130).toFixed(0) + "px");
+      b.style.setProperty("--by", (Math.random() * -220 - 40).toFixed(0) + "px");
+      b.style.setProperty("--br", (Math.random() * 720 - 360).toFixed(0) + "deg");
+      b.style.setProperty("--bs", (16 + Math.random() * 16).toFixed(0) + "px");
+      b.addEventListener("animationend", function () { b.remove(); });
+      document.body.appendChild(b);
+    }
+  }
+
+  function choose(index) {
+    if (rolling) return;
+    if (index === undefined) {
+      let next;
+      do {
+        next = Math.floor(Math.random() * menus.length);
+      } while (menus.length > 1 && next === current);
+      index = next;
+    }
+    rolling = true;
+    const gain = 2 + Math.floor(Math.random() * 3);
+    totalSpins += gain;
+    spinCountEl.textContent = totalSpins;
+    randomBtn.disabled = true;
+    randomLabel.textContent = "หมุน... หมุน... หมุน...";
+    cardEl.classList.add("mega");
+    burst(randomBtn);
+    window.setTimeout(function () {
+      current = index;
+      renderMenu(current);
+      liveEl.textContent = "ราชา TRIPLE THREE เลือก " + menus[current].name + " แล้ว — หมุนสะสม " + totalSpins + " รอบ";
+    }, 480);
+    window.setTimeout(function () {
+      cardEl.classList.remove("mega");
+      randomBtn.disabled = false;
+      randomLabel.textContent = "หมุนเมนูให้ราชาเลือก";
+      rolling = false;
+    }, 1000);
+  }
+
+  buildThumbs();
+  renderMenu(current);
+
+  document.getElementById("navRandom").addEventListener("click", function () {
+    document.getElementById("menu").scrollIntoView({ behavior: "smooth" });
+    choose();
+  });
+
+  randomBtn.addEventListener("click", function () { choose(); });
+
+  document.getElementById("ctaBtn").addEventListener("click", function () {
+    document.getElementById("menu").scrollIntoView({ behavior: "smooth" });
+    choose();
+  });
+
+  (function () {
+    const canFly =
+      window.matchMedia("(hover: hover) and (pointer: fine)").matches &&
+      !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!canFly) return;
+
+    const taunts = [
+      "จับไม่ได้หรอก 😏",
+      "ช้ากว่าข้า! 🌀",
+      "ปุ่มนี้ขี้ขลาด",
+      "หลบก่อนนะ!",
+      "อีกนิดเดียว... ไม่ให้ 😜"
+    ];
+    const idleLabel = "หมุนเมนูให้ราชาเลือก";
+    let tx = 0;
+    let ty = 0;
+    let rel = null;
+    let dodgeCount = 0;
+    let lastDodge = 0;
+    let tiredUntil = 0;
+    let labelTimer = 0;
+
+    function measure() {
+      randomBtn.style.transform = "translate(0px,0px)";
+      tx = 0;
+      ty = 0;
+      const cardRect = cardEl.getBoundingClientRect();
+      const btnRect = randomBtn.getBoundingClientRect();
+      rel = {
+        left: btnRect.left - cardRect.left,
+        top: btnRect.top - cardRect.top,
+        w: btnRect.width,
+        h: btnRect.height
+      };
+    }
+
+    function bounds() {
+      const cardRect = cardEl.getBoundingClientRect();
+      const margin = 8;
+      const minX = margin - rel.left;
+      const maxX = cardRect.width - margin - rel.left - rel.w;
+      const minY = margin - rel.top;
+      const maxY = cardRect.height - margin - rel.top - rel.h;
+      return {
+        minX: Math.min(minX, maxX),
+        maxX: Math.max(minX, maxX),
+        minY: Math.min(minY, maxY),
+        maxY: Math.max(minY, maxY)
+      };
+    }
+
+    function clampValue(value, lo, hi) {
+      return Math.max(lo, Math.min(hi, value));
+    }
+
+    function moveTo(x, y) {
+      const box = bounds();
+      tx = clampValue(x, box.minX, box.maxX);
+      ty = clampValue(y, box.minY, box.maxY);
+      randomBtn.style.transform = "translate(" + tx + "px," + ty + "px)";
+    }
+
+    function btnCenter() {
+      const cardRect = cardEl.getBoundingClientRect();
+      return {
+        x: cardRect.left + rel.left + tx + rel.w / 2,
+        y: cardRect.top + rel.top + ty + rel.h / 2
+      };
+    }
+
+    function setLabel(text, hold) {
+      window.clearTimeout(labelTimer);
+      randomLabel.textContent = text;
+      labelTimer = window.setTimeout(function () {
+        if (!rolling) randomLabel.textContent = idleLabel;
+      }, hold);
+    }
+
+    function flee(px, py) {
+      if (rolling || Date.now() < tiredUntil || !rel) return;
+      const box = bounds();
+      const cardRect = cardEl.getBoundingClientRect();
+      let bestX = 0;
+      let bestY = 0;
+      let bestDist = -1;
+      for (let i = 0; i < 14; i++) {
+        const x = box.minX + Math.random() * (box.maxX - box.minX);
+        const y = box.minY + Math.random() * (box.maxY - box.minY);
+        const cx = cardRect.left + rel.left + x + rel.w / 2;
+        const cy = cardRect.top + rel.top + y + rel.h / 2;
+        const dist = (cx - px) * (cx - px) + (cy - py) * (cy - py);
+        if (dist > bestDist) {
+          bestDist = dist;
+          bestX = x;
+          bestY = y;
+        }
+      }
+      moveTo(bestX, bestY);
+
+      const now = Date.now();
+      if (now - lastDodge > 2400) dodgeCount = 0;
+      lastDodge = now;
+      dodgeCount += 1;
+
+      if (dodgeCount >= 5) {
+        tiredUntil = now + 1600;
+        dodgeCount = 0;
+        randomBtn.classList.remove("taunting");
+        setLabel("😮‍💨 หมดแรง... กดเลย!", 1600);
+      } else {
+        randomBtn.classList.add("taunting");
+        setLabel(taunts[Math.floor(Math.random() * taunts.length)], 900);
+        window.setTimeout(function () {
+          randomBtn.classList.remove("taunting");
+        }, 900);
+      }
+    }
+
+    randomBtn.addEventListener("pointerenter", function (e) {
+      flee(e.clientX, e.clientY);
+    });
+
+    cardEl.addEventListener("pointermove", function (e) {
+      if (rolling || Date.now() < tiredUntil || !rel) return;
+      const c = btnCenter();
+      const dx = e.clientX - c.x;
+      const dy = e.clientY - c.y;
+      if (dx * dx + dy * dy < 130 * 130) flee(e.clientX, e.clientY);
+    }, { passive: true });
+
+    randomBtn.addEventListener("click", function () {
+      window.clearTimeout(labelTimer);
+      dodgeCount = 0;
+      tiredUntil = 0;
+      randomBtn.classList.remove("taunting");
+      moveTo(0, 0);
+    });
+
+    window.setInterval(function () {
+      if (rolling || Date.now() < tiredUntil || Math.random() < 0.55) return;
+      moveTo(tx + Math.random() * 120 - 60, ty + Math.random() * 90 - 45);
+    }, 2400);
+
+    window.addEventListener("resize", measure);
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(measure);
+    }
+    measure();
+  })();
+
+  (function () {
+    if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const items = [];
+    [".brand", "#navRandom", ".seal", ".badge", ".hero h1", ".hero-sub", ".stats", ".section-head", "#foodCard", ".steps .step", ".cta-banner", ".foot-brand", "footer p"].forEach(function (sel) {
+      document.querySelectorAll(sel).forEach(function (el) {
+        if (items.indexOf(el) === -1) items.push(el);
+      });
+    });
+    if (!items.length) return;
+
+    const states = items.map(function (el) {
+      el.style.willChange = "transform";
+      return { el: el, x: 0, y: 0, vx: 1, vy: 1, rx: 80, ry: 40 };
+    });
+
+    function tune() {
+      const w = window.innerWidth || document.documentElement.clientWidth || 800;
+      const h = window.innerHeight || document.documentElement.clientHeight || 600;
+      states.forEach(function (s) {
+        s.rx = w * (0.12 + Math.random() * 0.1);
+        s.ry = h * (0.07 + Math.random() * 0.05);
+        s.x = Math.max(-s.rx, Math.min(s.rx, s.x));
+        s.y = Math.max(-s.ry, Math.min(s.ry, s.y));
+        const sp = 20 + Math.random() * 25;
+        const ang = Math.random() * Math.PI * 2;
+        s.vx = Math.cos(ang) * sp;
+        s.vy = Math.sin(ang) * sp;
+      });
+    }
+
+    let last = 0;
+    function tick(now) {
+      const dt = Math.min(0.05, (now - last) / 1000 || 0);
+      last = now;
+      states.forEach(function (s) {
+        s.x += s.vx * dt;
+        s.y += s.vy * dt;
+        if (s.x > s.rx) { s.x = s.rx; s.vx = -Math.abs(s.vx); }
+        if (s.x < -s.rx) { s.x = -s.rx; s.vx = Math.abs(s.vx); }
+        if (s.y > s.ry) { s.y = s.ry; s.vy = -Math.abs(s.vy); }
+        if (s.y < -s.ry) { s.y = -s.ry; s.vy = Math.abs(s.vy); }
+        s.el.style.transform = "translate3d(" + s.x.toFixed(2) + "px," + s.y.toFixed(2) + "px,0)";
+      });
+      window.requestAnimationFrame(tick);
+    }
+
+    window.addEventListener("resize", tune);
+    tune();
+    window.requestAnimationFrame(tick);
+  })();
+
+  window.setInterval(makeEmber, 520);
+  for (let i = 0; i < 8; i++) {
+    window.setTimeout(makeEmber, i * 160);
+  }
+</script>
+</body>
+</html>
